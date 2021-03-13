@@ -1,0 +1,149 @@
+<script>
+    $(document).ready(function() {
+        setTimeout(() => {
+    const wrapper = $('.t-select__wrapper').eq(0);
+        
+    const oldSelect = $('.t-select_bbonly').eq(0);
+    
+    const options = oldSelect.get(0).options;
+    
+    const customSelect = $('<div class="custom-select"></div>');
+    
+    const customOptions = $('<div class="custom-options"></div>');
+    
+    customOptions.hide();
+    
+    customSelect.html(options[0].innerText)
+    
+    customSelect.click(() => {
+        customOptions.html('');
+        for (let index = 0; index < options.length; index++) {
+            const option = options[index];
+            const customOption = $('<div class="custom-option"></div>').html(option.innerText);
+            const dot = $('<div class="dot"></div>');
+            if (oldSelect.val() === option.value) {
+                customOption.append(dot);
+            } else {
+                customOption.children().eq(0).remove();
+            }
+            customOption.click(() => {
+                oldSelect.val(option.value);
+                customSelect.html(option.innerText);
+                if (oldSelect.val() === option.value) {
+                    customOption.append(dot);
+                } else {
+                    customOption.children().eq(0).remove();
+                }
+                customOptions.toggle();
+            });
+            customOptions.append(customOption);
+        }
+        customOptions.toggle();
+    });
+    
+    customOptions.html('');
+    for (let index = 0; index < options.length; index++) {
+        const option = options[index];
+        const customOption = $('<div class="custom-option"></div>').html(option.innerText);
+        const dot = $('<div class="dot"></div>');
+        if (oldSelect.val() === option.value) {
+            customOption.append(dot);
+        } else {
+            customOption.children().eq(0).remove();
+        }
+        customOption.click(() => {
+            oldSelect.val(option.value);
+            customSelect.html(option.innerText);
+            if (select.val() === option.value) {
+                oldSelect.append(dot);
+            } else {
+                customOption.children().eq(0).remove();
+            }
+            customOptions.toggle();
+        });
+        customOptions.append(customOption);
+    }
+    
+    wrapper.append(customSelect);
+    wrapper.append(customOptions);
+}, 1000);
+    });
+</script>
+
+<style>
+.t-select__wrapper {
+    position: relative;
+}
+
+.tn-elem[data-elem-id="1612446551848"] .t-select__wrapper:after {
+    display: none;
+}
+
+.t-select__wrapper select {
+    display: none;
+}
+
+.custom-options {
+    color: white;
+    background-color: #01072b;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    width: 90%;
+    max-height: 200px;
+    overflow-y: scroll;
+    z-index: 200;
+    font-family: 'Play/PTMono',Arial,sans-serif;
+}
+
+.custom-select {
+    font-family: 'Play/PTMono',Arial,sans-serif;
+}
+
+.custom-option {
+    margin: 5px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.custom-option:hover {
+    background-color: #020c46;
+}
+
+.t-select__wrapper .custom-select {
+    position: relative;
+    border: none;
+    border-bottom: 2px solid #62fdff;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 400;
+    height: 50px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.custom-select::after {
+    position: absolute;
+    content: "";
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+
+.dot {
+    background-color: white;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+}
+</style>
